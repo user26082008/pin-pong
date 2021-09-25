@@ -9,23 +9,6 @@ size = (700, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Pin-pong")
 
-game = True
-
-clock = pygame.time.Clock()
- 
-
-while game:
-    for event in pygame.event.get(): 
-        if event.type == pygame.QUIT: 
-              carryOn = False
-
-    screen.fill(BLACK)
-    pygame.draw.line(screen, WHITE, [320, 0], [330, 450], 5)
- 
-    pygame.display.flip()
-   
-    clock.tick(60)
-
 class Chief(pygame.sprite.Sprite):
     
     def __init__(self, color, width, height):
@@ -39,13 +22,61 @@ class Chief(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
 from chief import Chief
+ 
+pygame.init()
 
-chiefA = Paddle(WHITE, 10, 100)
+BLACK = (0,0,0)
+WHITE = (255,255,255)
+
+size = (700, 500)
+screen = pygame.display.set_mode(size)
+pygame.display.set_caption("Pong")
+ 
+chiefA = Chief(WHITE, 10, 100)
 chiefA.rect.x = 20
-chiefArect.y = 200
-
-chiefB = Paddle(WHITE, 10, 100)
+chiefA.rect.y = 200
+ 
+chiefB = Chief(WHITE, 10, 100)
 chiefB.rect.x = 670
 chiefB.rect.y = 200
+
+all_sprites_list = pygame.sprite.Group()
+
+all_sprites_list.add(chiefA)
+all_sprites_list.add(chiefB)
+
+game = True
+
+clock = pygame.time.Clock()
+
+while game:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+              game = False 
+        elif event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_x: 
+                     game=False
  
-pygame.quit()
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:
+        paddleA.moveUp(5)
+    if keys[pygame.K_s]:
+        paddleA.moveDown(5)
+    if keys[pygame.K_UP]:
+        paddleB.moveUp(5)
+    if keys[pygame.K_DOWN]:
+        paddleB.moveDown(5)    
+
+    all_sprites_list.update()
+ 
+    screen.fill(BLACK)
+    pygame.draw.line(screen, WHITE, [349, 0], [349, 500], 5)
+    
+    all_sprites_list.draw(screen) 
+ 
+    pygame.display.flip()
+
+    clock.tick(60)
+
+pygame.quit() 
+        
