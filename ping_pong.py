@@ -9,6 +9,7 @@ size = (700, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Pin-pong")
 
+
 class Chief(pygame.sprite.Sprite):
     
     def __init__(self, color, width, height):
@@ -20,8 +21,16 @@ class Chief(pygame.sprite.Sprite):
         pygame.draw.rect(self.image, color, [0, 0, width, height])
         
         self.rect = self.image.get_rect()
-
-from chief import Chief
+        
+def moveUp(self, pixels):
+        self.rect.y -= pixels
+        if self.rect.y < 0:
+          self.rect.y = 0
+          
+    def moveDown(self, pixels):
+        self.rect.y += pixels
+        if self.rect.y > 400:
+          self.rect.y = 400
  
 pygame.init()
 
@@ -78,5 +87,4 @@ while game:
 
     clock.tick(60)
 
-pygame.quit() 
-        
+pygame.quit()
