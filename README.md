@@ -9,3 +9,9 @@ this is game for 2 players(only on computer)
 #2
 
 control: up and down.
+
+#3
+
+for playing you should download VSC(Visual Studio Code) and open the file in it.
+
+#thanks for reading!☻☻☻
